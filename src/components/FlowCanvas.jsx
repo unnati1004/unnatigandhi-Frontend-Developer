@@ -1,17 +1,13 @@
 // File: src/components/FlowCanvas.jsx
 import React, { useEffect, useState } from "react";
-// import ReactFlow, {
-//   Background,
-//   Controls as FlowControls,
-//   MiniMap,
-//   ReactFlowProvider,
-//   applyNodeChanges,
-// } from "react-flow-renderer";
-import { ReactFlow,   Background,
+import {
+  ReactFlow,
+  Background,
   Controls as FlowControls,
   MiniMap,
   ReactFlowProvider,
-  applyNodeChanges, } from '@xyflow/react';
+  applyNodeChanges,
+} from '@xyflow/react';
 import '@xyflow/react/dist/style.css';
 import { getLayoutedElements } from "../utils/layout";
 import CustomHomeNode from "./CustomHomeNode";
@@ -24,7 +20,11 @@ const FlowCanvas = ({ flowData, setFlowData, homeSections, setHomeSections }) =>
   const [initialized, setInitialized] = useState(false);
 
   useEffect(() => {
-    if (!initialized) {
+    const allNodesAtOrigin = flowData.nodes.every(
+      (n) => n.position?.x === 0 && n.position?.y === 0
+    );
+
+    if (!initialized || allNodesAtOrigin) {
       const rawNodes = [
         {
           id: "Home",
@@ -66,7 +66,7 @@ const FlowCanvas = ({ flowData, setFlowData, homeSections, setHomeSections }) =>
       setFlowData({ nodes: layouted.nodes, edges: layouted.edges });
       setInitialized(true);
     }
-  }, [initialized, homeSections, setFlowData, setHomeSections]);
+  }, [initialized, homeSections, setFlowData, setHomeSections, flowData.nodes]);
 
   const onNodesChange = (changes) => {
     setFlowData((prev) => ({
@@ -75,14 +75,26 @@ const FlowCanvas = ({ flowData, setFlowData, homeSections, setHomeSections }) =>
     }));
   };
 
+  const handleResetLayout = () => {
+    const layouted = getLayoutedElements(flowData.nodes, flowData.edges);
+    setFlowData({ nodes: layouted.nodes, edges: layouted.edges });
+  };
+
   return (
     <ReactFlowProvider>
-      <div className="h-[600px] w-full border rounded shadow">
+      <div className="h-[600px] w-full border rounded shadow relative">
+        <button
+          onClick={handleResetLayout}
+          className="absolute top-2 right-2 bg-gray-600 text-white text-sm px-3 py-1 rounded z-10"
+        >
+          Reset Layout
+        </button>
         <ReactFlow
           nodes={flowData.nodes}
           edges={flowData.edges}
           onNodesChange={onNodesChange}
           fitView
+          onInit={(instance) => setTimeout(() => instance.fitView({ padding: 0.2 }), 100)}
           nodesDraggable={true}
           panOnScroll
           nodeTypes={nodeTypes}
