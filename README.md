@@ -2,7 +2,7 @@
 
 A visual editor built using **React Flow** that allows users to create, modify, and export website page hierarchies and their components. Ideal for content planning, UI/UX structuring, or sitemap design.
 
-![Screenshot](./screenshot.png)
+![Screenshot](./src/assets/screenshotScreen.png)
 
 ## ✨ Features
 
