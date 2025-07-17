@@ -1,12 +1,84 @@
-# React + Vite
+# 📄 Page Hierarchy Editor
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A visual editor built using **React Flow** that allows users to create, modify, and export website page hierarchies and their components. Ideal for content planning, UI/UX structuring, or sitemap design.
 
-Currently, two official plugins are available:
+![Screenshot](./screenshot.png)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## ✨ Features
 
-## Expanding the ESLint configuration
+- 🎯 Drag-and-drop page organization
+- 🔗 Automatic parent-child connection rendering
+- 🧩 Support for nested sections/components (e.g., Hero, CTA, Footer)
+- 💾 Save / Load functionality using local storage
+- 📤 Export layout as JSON
+- 🗺️ Mini-map for better navigation
+- 🧹 Reset layout positioning
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## 🛠️ Tech Stack
+
+- React.js
+- React Flow
+- Tailwind CSS (optional for styling)
+- Zustand or useState/useEffect for state management
+- Local Storage for save/load persistence
+
+## 🚀 Getting Started
+
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/your-username/page-hierarchy-editor.git
+cd page-hierarchy-editor
+2. Install Dependencies
+
+npm install
+
+3. Run the App
+
+npm run dev  # if using Vite
+# or
+npm start    # if using CRA
+4. Build for Production
+
+npm run build
+📁 Folder Structure (Example)
+
+src/
+├── components/
+│   ├── Node.jsx
+│   ├── Controls.jsx
+│   └── Sidebar.jsx
+├── data/
+│   └── initialNodes.js
+├── App.jsx
+└── main.jsx
+🧩 Example Use Case
+Visualize and manage the layout of a marketing website with pages like:
+
+Home Page
+
+Hero, Features, Testimonials, CTA, Footer
+
+Services → Service Detail 1 & 2
+
+Blog → Blog Post 1, Blog Post 2, Author Page
+
+Contact → Location Info, Support Page
+
+📦 Exported JSON
+The editor allows exporting the full layout including node positions and connections to JSON, which can be reused for:
+
+Importing into CMS or static site generator
+
+Documentation or client review
+
+Automated UI generation
+
+📜 License
+MIT
+
+Built with ❤️ using React Flow
+
+---
+
+Let me know if you want a link to host the screenshot or need this adapted for Vite, Next.js, or if your project has specific features like undo/redo, theming, etc.
